@@ -36,4 +36,4 @@ export const getPostBySlug = (dir: string, slug: string) => {
   const source = fs.readFileSync(filePath, "utf8");
   const { content, data } = matter(source);
   return { frontmatter: data, content };
-};
+}; 
