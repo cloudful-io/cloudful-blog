@@ -43,6 +43,6 @@
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true
   },
-  "include": ["src/**/*.ts"],      // Only compile files in src/
+  "include": ["src/**/*"],      // Only compile files in src/
   "exclude": ["node_modules", "tests", "**/*.test.ts"]  // Exclude tests
 }
