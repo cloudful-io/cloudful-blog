@@ -20,12 +20,14 @@ export function BlogList({
       <BlogTitle title={title} />
       {posts.map((post) => (
         <>
-          <Typography variant="body2" color="text.secondary">
-            {formatTimeAgo(new Date(`${post.date}T00:00:00`)).toUpperCase()}
-          </Typography>
-          <Typography variant="h3">{post.title}</Typography>
-          <Typography variant="body1" sx={{ mt: 1 }}>{post.summary}</Typography>
-          <Link href={`${blogRootUrl}/${post.slug}`}>Read more →</Link>
+          <div key={post.slug}>
+            <Typography variant="body2" color="text.secondary">
+              {formatTimeAgo(new Date(`${post.date}T00:00:00`)).toUpperCase()}
+            </Typography>
+            <Typography variant="h3">{post.title}</Typography>
+            <Typography variant="body1" sx={{ mt: 1 }}>{post.summary}</Typography>
+            <Link href={`${blogRootUrl}/${post.slug}`}>Read more →</Link>
+          </div>
         </>
       ))}
     </Stack>
