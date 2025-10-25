@@ -19,7 +19,6 @@ export function BlogList({
     <Stack spacing={2}>
       <BlogTitle title={title} />
       {posts.map((post) => (
-        <>
           <div key={post.slug}>
             <Typography variant="body2" color="text.secondary">
               {formatTimeAgo(new Date(`${post.date}T00:00:00`)).toUpperCase()}
@@ -28,7 +27,6 @@ export function BlogList({
             <Typography variant="body1" sx={{ mt: 1 }}>{post.summary}</Typography>
             <Link href={`${blogRootUrl}/${post.slug}`}>Read more →</Link>
           </div>
-        </>
       ))}
     </Stack>
   )
