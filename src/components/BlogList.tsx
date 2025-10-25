@@ -1,29 +1,32 @@
 "use client";
 import Link from "next/link";
-import { Typography, Stack, Divider, Card, CardContent } from "@mui/material";
+import { Typography, Stack } from "@mui/material";
 import type { PostMeta } from "../lib/mdx"
+import {BlogTitle} from "./BlogTitle"
+import formatTimeAgo from "../lib/formatTimeAgo";
 
-export function BlogList({ posts }: { posts: PostMeta[] }) {
+export function BlogList({ 
+  title,
+  blogRootUrl,
+  posts
+ }: { 
+  title?: string | undefined,
+  blogRootUrl : string,
+  posts: PostMeta[] 
+}) {
 
   return (
     <Stack spacing={2}>
-      <Typography variant="h2" sx={{mb:2}}>Product Updates</Typography>
-      <Divider sx={{ mb: 2 }} />
+      <BlogTitle title={title} />
       {posts.map((post) => (
-        <Card key={post.slug} sx={{ mb: 2 }}>
-          <CardContent>
-            <Typography variant="h5">{post.title}</Typography>
-            <Typography variant="body2" color="text.secondary">
-              {new Date(`${post.date}T00:00:00`).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })}
-            </Typography>
-            <Typography variant="body1" sx={{ mt: 1 }}>{post.summary}</Typography>
-            <Link href={`/blog/${post.slug}`}>Read more →</Link>
-          </CardContent>
-        </Card>
+        <>
+          <Typography variant="body2" color="text.secondary">
+            {formatTimeAgo(new Date(`${post.date}T00:00:00`)).toUpperCase()}
+          </Typography>
+          <Typography variant="h3">{post.title}</Typography>
+          <Typography variant="body1" sx={{ mt: 1 }}>{post.summary}</Typography>
+          <Link href={`${blogRootUrl}/${post.slug}`}>Read more →</Link>
+        </>
       ))}
     </Stack>
   )

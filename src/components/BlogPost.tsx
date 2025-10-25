@@ -1,33 +1,34 @@
 import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { Typography, Divider, Box, Stack } from '@mui/material'
+import { Typography, Box, Stack } from '@mui/material'
+import {BlogTitle} from "./BlogTitle"
+import formatTimeAgo from "../lib/formatTimeAgo";
 
 export function BlogPost({
+  title,
+  blogRootUrl,
   frontmatter,
   content,
 }: {
+  title?: string | undefined;
+  blogRootUrl: string;
   frontmatter: any;
   content: string;
 }) {
   return (
     <Stack spacing={2}>
-      <Typography variant="h2" sx={{mb:2}}>Product Updates</Typography>
-      <Divider sx={{ mb: 2 }} />
-      <Typography variant="h3" gutterBottom>{frontmatter.title}</Typography>
+      <BlogTitle title={title} />
       <Typography variant="body2" color="text.secondary" gutterBottom>
-        {new Date(`${frontmatter.date}T00:00:00`).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-        })}
+        {formatTimeAgo(new Date(`${frontmatter.date}T00:00:00`)).toUpperCase()}
       </Typography>
+      <Typography variant="h3" gutterBottom>{frontmatter.title}</Typography>
       <article className="prose">
         <MDXRemote source={content} />
       </article>
       <Box sx={{ mb: 3 }}>
-        <Link href="/blog" style={{ textDecoration: 'none' }}>
+        <Link href={blogRootUrl} style={{ textDecoration: 'none' }}>
           <Typography color="primary" sx={{ '&:hover': { textDecoration: 'underline' } }}>
-            ← Back to Product Updates
+            ← Back to {title ?? "Blog"}
           </Typography>
         </Link>
       </Box>
