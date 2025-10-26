@@ -19,10 +19,14 @@ export default function ImageRenderer(props: any) {
         height: "auto",
         borderRadius: 2,
         my: 2,
-        borderTop: `2px solid ${theme.palette.primary.main}`,
-        borderLeft: `2px solid ${theme.palette.primary.main}`,
-        borderRight: `2px solid ${theme.palette.primary.main}`,
+        borderTop: `5px solid ${theme.palette.primary.main}`,
+        borderLeft: `5px solid ${theme.palette.primary.main}`,
+        borderRight: `5px solid ${theme.palette.primary.main}`,
         borderBottom: "none",
+        borderTopLeftRadius: 8,
+        borderTopRightRadius: 8,
+        borderBottomLeftRadius: 0,
+        borderBottomRightRadius: 0,
       }}
       {...props}
     />
