@@ -7,9 +7,10 @@ export type PostMeta = {
   title: string;
   date: string;
   summary: string;
+  mdxSource?: string;
 };
 
-export const getAllPosts = (dir: string): PostMeta[] => {
+export const getAllPosts = (dir: string, withContent = false): PostMeta[] => {
   const files = fs.readdirSync(dir);
 
   return files
@@ -17,13 +18,16 @@ export const getAllPosts = (dir: string): PostMeta[] => {
       const slug = filename.replace(/\.mdx?$/, "");
       const fullPath = path.join(dir, filename);
       const fileContents = fs.readFileSync(fullPath, "utf8");
-      const { data } = matter(fileContents);
+      const { content, data } = matter(fileContents);
 
       return {
         slug,
         title: data.title || "Untitled",
         date: data.date || "1970-01-01",
         summary: data.summary || "",
+        ...(withContent
+          ? { mdxSource: content }
+          : {}),
       };
     })
     .sort(
