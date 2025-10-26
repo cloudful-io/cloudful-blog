@@ -41,10 +41,13 @@ const components = {
     <Box
       component="img"
       sx={{
-        maxWidth: '100%',
+        display: 'block', 
+        mx: 'auto', 
+        maxWidth: '60%',
         height: 'auto',
         borderRadius: 2,
         my: 2,
+        border: (theme) => `2px solid ${theme.palette.primary.main}`,
       }}
       {...props}
     />
