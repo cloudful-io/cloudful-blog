@@ -24,7 +24,7 @@ export function BlogList({
               {formatTimeAgo(new Date(`${post.date}T00:00:00`)).toUpperCase()}
             </Typography>
             <Typography variant="h2">{post.title}</Typography>
-            <Typography variant="body1">{post.summary}</Typography>
+            <Typography variant="body1" sx={{my:1}}>{post.summary}</Typography>
             <Link href={`${blogRootUrl}/${post.slug}`}>Read more →</Link>
           </div>
       ))}
