@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { Typography, Box, Stack } from '@mui/material'
+import { Typography, Box, Stack, useTheme } from '@mui/material'
 import {BlogTitle} from "./BlogTitle"
 import formatTimeAgo from "../lib/formatTimeAgo";
 
@@ -37,19 +37,22 @@ export function BlogPost({
 }
 
 const components = {
-  img: (props: any) => (
-    <Box
-      component="img"
-      sx={{
-        display: 'block', 
-        mx: 'auto', 
-        maxWidth: '60%',
-        height: 'auto',
-        borderRadius: 2,
-        my: 2,
-        border: (theme) => `2px solid ${theme.palette.primary.main}`,
-      }}
-      {...props}
-    />
-  ),
+  img: (props: any) => {
+    const theme = useTheme();
+    return (
+      <Box
+        component="img"
+        sx={{
+          display: "block",
+          mx: "auto",
+          maxWidth: "60%",
+          height: "auto",
+          borderRadius: 2,
+          my: 2,
+          border: `2px solid ${theme.palette.primary.main}`,
+        }}
+        {...props}
+      />
+    );
+  },
 };
