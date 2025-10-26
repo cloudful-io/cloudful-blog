@@ -37,10 +37,10 @@ export function formatTimeAgo(
     YEAR: 365.25 * 24 * 60 * 60,
   };
 
-  // ✅ If more than ~1 month difference, return the actual date instead of relative time
+  // If more than ~1 month difference, return the actual date instead of relative time
   if (absSeconds > SECS.MONTH) {
     const date = new Date(time);
-    // Example: "Oct 25, 2025"
+
     return date.toLocaleDateString(locale, {
       year: "numeric",
       month: "long",
@@ -48,7 +48,7 @@ export function formatTimeAgo(
     });
   }
 
-  // continue with relative formatting below
+  // Continue with relative formatting below
   type UnitName = "second" | "minute" | "hour" | "day" | "week" | "month" | "year";
 
   let unit: UnitName = "second";

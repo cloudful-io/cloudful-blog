@@ -23,7 +23,7 @@ export function BlogPost({
       </Typography>
       <Typography variant="h2">{frontmatter.title}</Typography>
       <article className="prose">
-        <MDXRemote source={content} />
+        <MDXRemote source={content} components={components}/>
       </article>
       <Box sx={{ mb: 3 }}>
         <Link href={blogRootUrl} style={{ textDecoration: 'none' }}>
@@ -35,3 +35,18 @@ export function BlogPost({
     </Stack>
   );
 }
+
+const components = {
+  img: (props: any) => (
+    <Box
+      component="img"
+      sx={{
+        maxWidth: '100%',
+        height: 'auto',
+        borderRadius: 2,
+        my: 2,
+      }}
+      {...props}
+    />
+  ),
+};
