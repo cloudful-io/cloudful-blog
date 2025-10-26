@@ -21,7 +21,7 @@ export function BlogPost({
       <Typography variant="body2" color="text.secondary">
         {formatTimeAgo(new Date(`${frontmatter.date}T00:00:00`)).toUpperCase()}
       </Typography>
-      <Typography variant="h3">{frontmatter.title}</Typography>
+      <Typography variant="h2">{frontmatter.title}</Typography>
       <article className="prose">
         <MDXRemote source={content} />
       </article>
