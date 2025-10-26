@@ -10,11 +10,19 @@ export default function ImageRenderer(props: any) {
       sx={{
         display: "block",
         mx: "auto",
-        maxWidth: "60%",
+        width: {
+          xs: '100%',   
+          sm: '80%',    
+          md: '70%',    
+          lg: '60%',
+        },
         height: "auto",
         borderRadius: 2,
         my: 2,
-        border: `1px solid ${theme.palette.primary.main}`,
+        borderTop: `2px solid ${theme.palette.primary.main}`,
+        borderLeft: `2px solid ${theme.palette.primary.main}`,
+        borderRight: `2px solid ${theme.palette.primary.main}`,
+        borderBottom: "none",
       }}
       {...props}
     />
