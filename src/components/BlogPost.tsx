@@ -21,10 +21,10 @@ export function BlogPost({
       <Typography variant="body2" color="text.secondary" gutterBottom>
         {formatTimeAgo(new Date(`${frontmatter.date}T00:00:00`)).toUpperCase()}
       </Typography>
-      <Typography variant="h3" gutterBottom>{frontmatter.title}</Typography>
-      <article className="prose">
+      <Typography variant="h3">{frontmatter.title}</Typography>
+      <Typography variant="body1" sx={{ mt: 1 }}>
         <MDXRemote source={content} />
-      </article>
+      </Typography>
       <Box sx={{ mb: 3 }}>
         <Link href={blogRootUrl} style={{ textDecoration: 'none' }}>
           <Typography color="primary" sx={{ '&:hover': { textDecoration: 'underline' } }}>
