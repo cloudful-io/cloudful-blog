@@ -18,13 +18,13 @@ export function BlogPost({
   return (
     <Stack spacing={2}>
       <BlogTitle title={title} />
-      <Typography variant="body2" color="text.secondary" gutterBottom>
+      <Typography variant="body2" color="text.secondary">
         {formatTimeAgo(new Date(`${frontmatter.date}T00:00:00`)).toUpperCase()}
       </Typography>
       <Typography variant="h3">{frontmatter.title}</Typography>
-      <Typography variant="body1" sx={{ mt: 1 }}>
+      <article className="prose">
         <MDXRemote source={content} />
-      </Typography>
+      </article>
       <Box sx={{ mb: 3 }}>
         <Link href={blogRootUrl} style={{ textDecoration: 'none' }}>
           <Typography color="primary" sx={{ '&:hover': { textDecoration: 'underline' } }}>
