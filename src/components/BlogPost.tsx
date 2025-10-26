@@ -2,6 +2,7 @@ import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { Typography, Box, Stack, useTheme } from '@mui/material'
 import {BlogTitle} from "./BlogTitle"
+import ImageRenderer from "./ImageRenderer";
 import formatTimeAgo from "../lib/formatTimeAgo";
 
 export function BlogPost({
@@ -36,20 +37,4 @@ export function BlogPost({
   );
 }
 
-const components = {
-  img: (props: any) => (
-    <Box
-      component="img"
-      sx={{
-        display: "block",
-        mx: "auto",
-        maxWidth: "60%",
-        height: "auto",
-        borderRadius: 2,
-        my: 2,
-        border: "2px solid var(--mui-palette-primary-main)", 
-      }}
-      {...props}
-    />
-  ),
-};
+const components = { img: ImageRenderer };
