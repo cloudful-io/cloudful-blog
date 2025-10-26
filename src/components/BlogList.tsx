@@ -1,4 +1,3 @@
-"use client";
 import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { Typography, Stack } from "@mui/material";
