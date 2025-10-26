@@ -24,24 +24,31 @@ export function formatTimeAgo(
   const time = input instanceof Date ? input.getTime() : Number(input);
   const nowMs = now instanceof Date ? now.getTime() : Number(now);
 
-  // difference in seconds (positive -> input is in future; negative -> input is in past)
   const diffSeconds = (time - nowMs) / 1000;
-
-  // absolute seconds for thresholds
   const absSeconds = Math.abs(diffSeconds);
 
-  // unit definitions (approximate for months/years)
   const SECS = {
     SECOND: 1,
     MINUTE: 60,
     HOUR: 60 * 60,
     DAY: 24 * 60 * 60,
     WEEK: 7 * 24 * 60 * 60,
-    MONTH: 30.44 * 24 * 60 * 60, // average month
-    YEAR: 365.25 * 24 * 60 * 60, // average year
+    MONTH: 30.44 * 24 * 60 * 60,
+    YEAR: 365.25 * 24 * 60 * 60,
   };
 
-  // choose best unit
+  // ✅ If more than ~1 month difference, return the actual date instead of relative time
+  if (absSeconds > SECS.MONTH) {
+    const date = new Date(time);
+    // Example: "Oct 25, 2025"
+    return date.toLocaleDateString(locale, {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+  }
+
+  // continue with relative formatting below
   type UnitName = "second" | "minute" | "hour" | "day" | "week" | "month" | "year";
 
   let unit: UnitName = "second";
@@ -79,7 +86,6 @@ export function formatTimeAgo(
     value = Math.round(diffSeconds / SECS.YEAR);
   }
 
-  // Use Intl.RelativeTimeFormat when available
   const rtfSupported = typeof Intl !== "undefined" && (Intl as any).RelativeTimeFormat;
   if (rtfSupported) {
     try {
@@ -87,26 +93,20 @@ export function formatTimeAgo(
         numeric,
         style,
       });
-      // Intl.RelativeTimeFormat expects the amount relative to "now".
-      // It traditionally takes a number (negative = past, positive = future)
       return rtf.format(value, unit);
-    } catch (e) {
-      // fall through to fallback format
-    }
+    } catch (e) {}
   }
 
-  // Fallback: English-ish formatting
   const absValue = Math.abs(value);
   const plural = absValue === 1 ? unit : unit + "s";
   if (value === 0) {
     return "just now";
   } else if (value < 0) {
-    // past
     return `${absValue} ${plural} ago`;
   } else {
-    // future
     return `in ${absValue} ${plural}`;
   }
 }
+
 
 export default formatTimeAgo;
