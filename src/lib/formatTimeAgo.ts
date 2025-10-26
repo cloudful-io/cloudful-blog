@@ -43,7 +43,7 @@ export function formatTimeAgo(
     // Example: "Oct 25, 2025"
     return date.toLocaleDateString(locale, {
       year: "numeric",
-      month: "short",
+      month: "long",
       day: "numeric",
     });
   }
