@@ -28,6 +28,10 @@ export function BlogList({
               {formatTimeAgo(new Date(`${post.date}T00:00:00`)).toUpperCase()}
             </Typography>
             <Typography variant="h2">{post.title}</Typography>
+            <AuthorInfo
+              name={post.author?.name}
+              picture={post.author?.picture}
+            />
             {showFullContent ? (
               <article className="prose mt-2">
                 <MDXRemote source={post.mdxSource!} components={components} />
@@ -40,10 +44,6 @@ export function BlogList({
                   <Link href={`${blogRootUrl}/${post.slug}`}>Read more →</Link>
                 </div>
             )}
-            <AuthorInfo
-              name={post.author?.name}
-              picture={post.author?.picture}
-            />
             {index < (posts.length-1) && (
               <Divider sx={{ my: 2 }} />
             )}
