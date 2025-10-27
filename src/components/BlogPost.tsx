@@ -3,6 +3,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import { Typography, Box, Stack, useTheme } from '@mui/material'
 import {BlogTitle} from "./BlogTitle"
 import ImageRenderer from "./ImageRenderer";
+import AuthorInfo from "./AuthorInfo";
 import formatTimeAgo from "../lib/formatTimeAgo";
 
 export function BlogPost({
@@ -23,6 +24,10 @@ export function BlogPost({
         {formatTimeAgo(new Date(`${frontmatter.date}T00:00:00`)).toUpperCase()}
       </Typography>
       <Typography variant="h2">{frontmatter.title}</Typography>
+      <AuthorInfo
+        name={frontmatter.author?.name}
+        picture={frontmatter.author?.picture}
+      />
       <article className="prose">
         <MDXRemote source={content} components={components}/>
       </article>

@@ -7,6 +7,10 @@ export type PostMeta = {
   title: string;
   date: string;
   summary: string;
+  author?: {
+    name: string;
+    picture: string;
+  } | undefined;
   mdxSource?: string;
 };
 
@@ -19,11 +23,19 @@ export const getAllPosts = (dir: string, withContent = false): PostMeta[] => {
       const fullPath = path.join(dir, filename);
       const fileContents = fs.readFileSync(fullPath, "utf8");
       const { content, data } = matter(fileContents);
+      const author =
+        typeof data.author === "object"
+          ? {
+              name: data.author.name || "",
+              picture: data.author.picture || "",
+            }
+          : undefined;
 
       return {
         slug,
         title: data.title || "Untitled",
         date: data.date || "1970-01-01",
+        author,
         summary: data.summary || "",
         ...(withContent
           ? { mdxSource: content }

@@ -4,6 +4,7 @@ import { Typography, Stack } from "@mui/material";
 import type { PostMeta } from "../lib/mdx"
 import {BlogTitle} from "./BlogTitle"
 import ImageRenderer from "./ImageRenderer";
+import AuthorInfo from "./AuthorInfo";
 import formatTimeAgo from "../lib/formatTimeAgo";
 
 export function BlogList({ 
@@ -26,6 +27,10 @@ export function BlogList({
             <Typography variant="body2" color="text.secondary">
               {formatTimeAgo(new Date(`${post.date}T00:00:00`)).toUpperCase()}
             </Typography>
+            <AuthorInfo
+              name={post.author?.name}
+              picture={post.author?.picture}
+            />
             <Typography variant="h2">{post.title}</Typography>
             {showFullContent ? (
               <article className="prose mt-2">
