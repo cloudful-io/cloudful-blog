@@ -24,10 +24,6 @@ export function BlogPost({
         {formatTimeAgo(new Date(`${frontmatter.date}T00:00:00`)).toUpperCase()}
       </Typography>
       <Typography variant="h2">{frontmatter.title}</Typography>
-      <AuthorInfo
-        name={frontmatter.author?.name}
-        picture={frontmatter.author?.picture}
-      />
       <article className="prose">
         <MDXRemote source={content} components={components}/>
       </article>
@@ -38,6 +34,10 @@ export function BlogPost({
           </Typography>
         </Link>
       </Box>
+      <AuthorInfo
+        name={frontmatter.author?.name}
+        picture={frontmatter.author?.picture}
+      />
     </Stack>
   );
 }
