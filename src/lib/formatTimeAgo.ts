@@ -1,7 +1,6 @@
 // formatTimeAgo.ts
 export type FormatTimeAgoOptions = {
   locale?: string; // e.g. "en", "en-US", "fr"
-  now?: Date | number; // override "now" for testing
   numeric?: "auto" | "always"; // passed to Intl.RelativeTimeFormat
   style?: "long" | "short" | "narrow"; // passed to Intl.RelativeTimeFormat
 };
@@ -18,13 +17,13 @@ export function formatTimeAgo(
     throw new Error("formatTimeAgo: input must be a Date or timestamp.");
   }
 
-  const { locale = "en", now = Date.now(), numeric = "auto", style = "long" } =
+  const { locale = "en", numeric = "auto", style = "long" } =
     options;
 
   const time = input instanceof Date ? input.getTime() : Number(input);
-  const nowMs = now instanceof Date ? now.getTime() : Number(now);
+  const now = Date.now();
 
-  const diffSeconds = (time - nowMs) / 1000;
+  const diffSeconds = (time - now) / 1000;
   const absSeconds = Math.abs(diffSeconds);
 
   const SECS = {
