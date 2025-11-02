@@ -4,6 +4,7 @@ import { Typography, Box, Stack, useTheme } from '@mui/material'
 import {BlogTitle} from "./BlogTitle"
 import ImageRenderer from "./ImageRenderer";
 import AuthorInfo from "./AuthorInfo";
+import { TagList } from "./TagList";
 import formatTimeAgo from "../lib/formatTimeAgo";
 
 export function BlogPost({
@@ -19,6 +20,7 @@ export function BlogPost({
 }) {
   return (
     <Stack spacing={2}>
+      <TagList blogRootUrl={blogRootUrl} tags={frontmatter.tags} />
       <BlogTitle title={title} />
       <Typography variant="body2" color="text.secondary">
         {formatTimeAgo(new Date(`${frontmatter.date}T00:00:00`)).toUpperCase()}

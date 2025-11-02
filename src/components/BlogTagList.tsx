@@ -8,13 +8,15 @@ import AuthorInfo from "./AuthorInfo";
 import { TagList } from "./TagList";
 import formatTimeAgo from "../lib/formatTimeAgo";
 
-export function BlogList({ 
+export function BlogTagList({ 
   title,
+  tag,
   blogRootUrl,
   showFullContent,
   posts
  }: { 
   title?: string | undefined,
+  tag: string,
   blogRootUrl : string,
   showFullContent?: boolean,
   posts: PostMeta[] 
@@ -23,6 +25,9 @@ export function BlogList({
   return (
     <Stack spacing={2}>
       <BlogTitle title={title} />
+      <Typography variant="h4" sx={{ mb: 2 }}>
+        Posts tagged with "{tag}"
+      </Typography>
       {posts.map((post, index) => (
           <div key={post.slug}>
             <TagList blogRootUrl={blogRootUrl} tags={post.tags} />
