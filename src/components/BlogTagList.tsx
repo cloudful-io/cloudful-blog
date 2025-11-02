@@ -30,7 +30,6 @@ export function BlogTagList({
       </Typography>
       {posts.map((post, index) => (
           <div key={post.slug}>
-            <TagList blogRootUrl={blogRootUrl} tags={post.tags} />
             <Typography variant="body2" color="text.secondary">
               {formatTimeAgo(new Date(`${post.date}T00:00:00`)).toUpperCase()}
             </Typography>
@@ -39,6 +38,7 @@ export function BlogTagList({
               name={post.author?.name}
               picture={post.author?.picture}
             />
+            <TagList blogRootUrl={blogRootUrl} tags={post.tags} />
             {showFullContent ? (
               <article className="prose mt-2">
                 <MDXRemote source={post.mdxSource!} components={components} />

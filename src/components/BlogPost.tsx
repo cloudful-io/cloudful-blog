@@ -20,7 +20,6 @@ export function BlogPost({
 }) {
   return (
     <Stack spacing={2}>
-      <TagList blogRootUrl={blogRootUrl} tags={frontmatter.tags} />
       <BlogTitle title={title} />
       <Typography variant="body2" color="text.secondary">
         {formatTimeAgo(new Date(`${frontmatter.date}T00:00:00`)).toUpperCase()}
@@ -30,6 +29,7 @@ export function BlogPost({
         name={frontmatter.author?.name}
         picture={frontmatter.author?.picture}
       />
+      <TagList blogRootUrl={blogRootUrl} tags={frontmatter.tags} />
       <article className="prose">
         <MDXRemote source={content} components={components}/>
       </article>
