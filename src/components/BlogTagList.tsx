@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { Typography, Stack, Divider } from "@mui/material";
+import { Typography, Stack, Box, Divider } from "@mui/material";
 import type { PostMeta } from "../lib/mdx"
 import {BlogTitle} from "./BlogTitle"
 import ImageRenderer from "./ImageRenderer";
@@ -56,6 +56,13 @@ export function BlogTagList({
             )}
           </div>
       ))}
+      <Box sx={{ mb: 3 }}>
+        <Link href={blogRootUrl} style={{ textDecoration: 'none' }}>
+          <Typography color="primary" sx={{ '&:hover': { textDecoration: 'underline' } }}>
+            ← Back to {title ?? "Blog"}
+          </Typography>
+        </Link>
+      </Box>
     </Stack>
   )
 }
