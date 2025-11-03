@@ -1,14 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { Box, useTheme, Dialog, IconButton } from "@mui/material";
+import { Box, useTheme, useMediaQuery, Dialog, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
 export default function ImageRenderer(props: any) {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
-
   const { src, alt } = props;
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <>
@@ -47,6 +47,7 @@ export default function ImageRenderer(props: any) {
       <Dialog
         open={open}
         onClose={() => setOpen(false)}
+        fullScreen={isMobile}
         maxWidth="xl"
         PaperProps={{
           sx: {
@@ -76,8 +77,8 @@ export default function ImageRenderer(props: any) {
           src={src}
           alt={alt}
           sx={{
-            maxWidth: "90vw",
-            maxHeight: "90vh",
+            maxWidth: isMobile ? "98vw" : "90vw",
+            maxHeight: isMobile ? "98vh" : "90vh",
             margin: "auto",
             display: "block",
             borderRadius: 2,
