@@ -78,7 +78,7 @@ export default function ImageRenderer(props: any) {
           alt={alt}
           sx={{
             maxWidth: isMobile ? "98vw" : "90vw",
-            maxHeight: isMobile ? "98vh" : "90vh",
+            maxHeight: "90vh",
             margin: "auto",
             display: "block",
             borderRadius: 2,
