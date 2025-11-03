@@ -12,7 +12,7 @@ export function TagList({ tags = [], blogRootUrl }: TagListProps) {
   return (
     <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1, mb: 1 }}>
       {tags.map((tag) => (
-        <Link key={tag} href={`${blogRootUrl}/tags/${encodeURIComponent(tag)}`} passHref>
+        <Link key={tag} href={`${blogRootUrl}/tag/${encodeURIComponent(tag)}`} passHref>
           <Chip
             label={tag}
             variant="outlined"  
