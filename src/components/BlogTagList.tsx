@@ -26,7 +26,7 @@ export function BlogTagList({
     <Stack spacing={2}>
       <BlogTitle title={title} />
       <Typography variant="h4" sx={{ mb: 2 }}>
-        Posts tagged with "{tag}"
+        Tag: {tag}
       </Typography>
       {posts.map((post, index) => (
           <div key={post.slug}>
