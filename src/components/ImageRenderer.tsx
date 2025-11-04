@@ -47,7 +47,7 @@ export default function ImageRenderer(props: any) {
       <Dialog
         open={open}
         onClose={() => setOpen(false)}
-        fullWidth={isMobile}
+        fullScreen={isMobile}
         maxWidth="xl"
         PaperProps={{
           sx: {
