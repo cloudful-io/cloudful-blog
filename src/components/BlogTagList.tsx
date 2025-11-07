@@ -2,7 +2,6 @@ import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { Typography, Stack, Box, Divider } from "@mui/material";
 import type { PostMeta } from "../lib/mdx"
-import {BlogTitle} from "./BlogTitle"
 import ImageRenderer from "./ImageRenderer";
 import AuthorInfo from "./AuthorInfo";
 import { TagList } from "./TagList";
@@ -24,7 +23,6 @@ export function BlogTagList({
 
   return (
     <Stack spacing={2}>
-      <BlogTitle title={title} />
       <Typography variant="h4" sx={{ mb: 2 }}>
         Tag: {tag}
       </Typography>

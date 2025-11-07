@@ -2,14 +2,12 @@ import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { Typography, Stack, Divider } from "@mui/material";
 import type { PostMeta } from "../lib/mdx"
-import {BlogTitle} from "./BlogTitle"
 import ImageRenderer from "./ImageRenderer";
 import AuthorInfo from "./AuthorInfo";
 import { TagList } from "./TagList";
 import formatTimeAgo from "../lib/formatTimeAgo";
 
 export function BlogList({ 
-  title,
   blogRootUrl,
   showFullContent,
   posts
@@ -22,7 +20,6 @@ export function BlogList({
 
   return (
     <Stack spacing={2}>
-      <BlogTitle title={title} />
       {posts.map((post, index) => (
           <div key={post.slug}>
             <Typography variant="body2" color="text.secondary">
