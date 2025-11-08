@@ -53,7 +53,10 @@ Each `.md` file under `/public/blog` should include frontmatter metadata, e.g.:
 ---
 title: "Introducing Cloudful-Blog"
 date: "2025-02-10"
-excerpt: "We’re excited to launch our new reusable blogging engine, based on markdown file!"
+summary: "We’re excited to launch our new reusable blogging engine, based on markdown file!"
+author:
+  name: John Doe
+  picture: "/images/blog/authors/john.jpg"
 tags: ["blog", "tag", "post"]
 ---
 
