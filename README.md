@@ -32,122 +32,7 @@ These pages leverage the reusable components and helper functions provided by **
 
 ---
 
-### 1️⃣ `/app/blog/page.tsx` — Blog List Page
-
-Lists all blog posts, sorted by date.
-
-```tsx
-import PageContainer from '@/app/(DashboardLayout)/components/container/PageContainer';
-import { getAllPosts, BlogList } from "cloudful-blog"
-import path from "path";
-
-export default function BlogPage() {
-  const posts = getAllPosts(path.join(process.cwd(), "/public/blog"), true).sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
-
-  return (
-    <PageContainer title="Product Updates" description="Typing Help: Product Updates" showTitle>
-      <BlogList
-        posts={posts}
-        blogRootUrl="/blog"
-        title="Product Updates"
-        showFullContent
-      />
-    </PageContainer>
-  );
-}
-```
-
-✅ **Key functions:**
-- `getAllPosts(directory, includeTags)` – Loads all blog posts with optional tag info.  
-- `BlogList` – Displays a list or grid of posts with metadata.
-
----
-
-### 2️⃣ `/app/blog/[slug]/page.tsx` — Individual Post Page
-
-Displays a single post based on its slug.
-
-```tsx
-import PageContainer from '@/app/(DashboardLayout)/components/container/PageContainer';
-import path from "path";
-import { getAllPosts, getPostBySlug, BlogPost } from "cloudful-blog";
-
-export async function generateStaticParams() {
-  const posts = getAllPosts(path.join(process.cwd(), "/public/blog"));
-  return posts.map((post) => ({ slug: post.slug }));
-}
-
-export default async function BlogPostPage(props: { params: Promise<{ slug: string }> }) {
-  const { slug } = await props.params;
-  const { frontmatter, content } = getPostBySlug(path.join(process.cwd(), "/public/blog"), slug);
-
-  return (
-    <PageContainer title={frontmatter.title} description={frontmatter.excerpt} showTitle>
-      <BlogPost
-        frontmatter={frontmatter}
-        content={content}
-        blogRootUrl="/blog"
-        title="Product Updates"
-      />
-    </PageContainer>
-  );
-}
-```
-
-✅ **Key functions:**
-- `getPostBySlug(directory, slug)` – Loads a single post’s content and frontmatter.  
-- `BlogPost` – Renders Markdown + metadata for the post.
-
----
-
-### 3️⃣ `/app/blog/tag/[tag]/page.tsx` — Tag Filter Page
-
-Lists posts filtered by tag.
-
-```tsx
-import PageContainer from '@/app/(DashboardLayout)/components/container/PageContainer';
-import { getPostsByTag, BlogTagList } from "cloudful-blog";
-import path from "path";
-
-export default async function BlogTagPage(props: { params: Promise<{ tag: string }> }) {
-  const { tag } = await props.params;
-  const posts = getPostsByTag(path.join(process.cwd(), "/public/blog"), tag, true).sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
-
-  return (
-    <PageContainer title={`Product Updates - ${tag}`} description={`Posts tagged with ${tag}`} showTitle>
-      <BlogTagList
-        posts={posts}
-        blogRootUrl="/blog"
-        title="Product Updates"
-        tag={tag}
-        showFullContent
-      />
-    </PageContainer>
-  );
-}
-```
-
-✅ **Key functions:**
-- `getPostsByTag(directory, tag)` – Filters posts matching the given tag.  
-- `BlogTagList` – Displays all posts under the selected tag.
-
----
-
-### 🧩 Components Overview
-
-| Component | Description | Typical Use |
-|------------|--------------|--------------|
-| `BlogList` | Lists all blog posts | `/blog/page.tsx` |
-| `BlogPost` | Displays a single post | `/blog/[slug]/page.tsx` |
-| `BlogTagList` | Lists posts filtered by a tag | `/blog/tag/[tag]/page.tsx` |
-
----
-
-## 📁 Example Folder Structure
+### 📁 Example Folder Structure
 
 ```
 my-app/
@@ -168,14 +53,120 @@ Each `.md` file under `/public/blog` should include frontmatter metadata, e.g.:
 
 ```md
 ---
-title: "Introducing the Word Rain Game"
+title: "Introducing Cloudful-Blog"
 date: "2025-02-10"
-excerpt: "We’re excited to launch our new Word Rain typing challenge!"
-tags: ["typing", "games", "update"]
+excerpt: "We’re excited to launch our new reusable blogging engine, based on markdown file!"
+tags: ["blog", "tag", "post"]
 ---
 
 Your post content in **Markdown** goes here.
 ```
+
+---
+
+### 1️⃣ `/app/blog/page.tsx` — Blog List Page
+
+Lists all blog posts, sorted by date.
+
+```tsx
+import { getAllPosts, BlogList } from "cloudful-blog"
+import path from "path";
+
+export default function BlogPage() {
+  const posts = getAllPosts(path.join(process.cwd(), "/public/blog"), true).sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
+
+  return (
+      <BlogList
+        posts={posts}
+        blogRootUrl="/blog"
+        title="Product Updates"
+        showFullContent
+      />
+  );
+}
+```
+
+✅ **Key functions:**
+- `getAllPosts(directory, includeTags)` – Loads all blog posts with optional tag info.  
+- `BlogList` – Displays a list or grid of posts with metadata.
+
+---
+
+### 2️⃣ `/app/blog/[slug]/page.tsx` — Individual Post Page
+
+Displays a single post based on its slug.
+
+```tsx
+import path from "path";
+import { getAllPosts, getPostBySlug, BlogPost } from "cloudful-blog";
+
+export async function generateStaticParams() {
+  const posts = getAllPosts(path.join(process.cwd(), "/public/blog"));
+  return posts.map((post) => ({ slug: post.slug }));
+}
+
+export default async function BlogPostPage(props: { params: Promise<{ slug: string }> }) {
+  const { slug } = await props.params;
+  const { frontmatter, content } = getPostBySlug(path.join(process.cwd(), "/public/blog"), slug);
+
+  return (
+      <BlogPost
+        frontmatter={frontmatter}
+        content={content}
+        blogRootUrl="/blog"
+        title="Product Updates"
+      />
+  );
+}
+```
+
+✅ **Key functions:**
+- `getPostBySlug(directory, slug)` – Loads a single post’s content and frontmatter.  
+- `BlogPost` – Renders Markdown + metadata for the post.
+
+---
+
+### 3️⃣ `/app/blog/tag/[tag]/page.tsx` — Tag Filter Page
+
+Lists posts filtered by tag.
+
+```tsx
+import { getPostsByTag, BlogTagList } from "cloudful-blog";
+import path from "path";
+
+export default async function BlogTagPage(props: { params: Promise<{ tag: string }> }) {
+  const { tag } = await props.params;
+  const posts = getPostsByTag(path.join(process.cwd(), "/public/blog"), tag, true).sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
+
+  return (
+      <BlogTagList
+        posts={posts}
+        blogRootUrl="/blog"
+        title="Product Updates"
+        tag={tag}
+        showFullContent
+      />
+  );
+}
+```
+
+✅ **Key functions:**
+- `getPostsByTag(directory, tag)` – Filters posts matching the given tag.  
+- `BlogTagList` – Displays all posts under the selected tag.
+
+---
+
+### 🧩 Components Overview
+
+| Component | Description | Typical Use |
+|------------|--------------|--------------|
+| `BlogList` | Lists all blog posts | `/blog/page.tsx` |
+| `BlogPost` | Displays a single post | `/blog/[slug]/page.tsx` |
+| `BlogTagList` | Lists posts filtered by a tag | `/blog/tag/[tag]/page.tsx` |
 
 ---
 
