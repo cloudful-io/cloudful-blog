@@ -30,8 +30,6 @@ yarn add cloudful-blog
 To integrate your blog, you’ll create **three pages** under your Next.js `app` directory.  
 These pages leverage the reusable components and helper functions provided by **cloudful-blog**.
 
----
-
 ### 📁 Example Folder Structure
 
 ```
@@ -190,4 +188,4 @@ export default async function BlogTagPage(props: { params: Promise<{ tag: string
 
 ## 🧾 License
 
-MIT © Cloudful Labs
+MIT © Cloudful
