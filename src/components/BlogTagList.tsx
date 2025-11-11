@@ -7,6 +7,7 @@ import LinkRenderer from "./LinkRenderer";
 import AuthorInfo from "./AuthorInfo";
 import { TagList } from "./TagList";
 import formatTimeAgo from "../lib/formatTimeAgo";
+import { calculateReadingTime } from "../lib/mdx";
 
 export function BlogTagList({ 
   title,
@@ -30,7 +31,8 @@ export function BlogTagList({
       {posts.map((post, index) => (
           <div key={post.slug}>
             <Typography variant="body2" color="text.secondary">
-              {formatTimeAgo(new Date(`${post.date}T00:00:00`)).toUpperCase()}
+              {formatTimeAgo(new Date(`${post.date}T00:00:00`)).toUpperCase()} ·
+              {` ${calculateReadingTime(post.mdxSource || "")} min read`}
             </Typography>
             <Typography variant="h2">{post.title}</Typography>
             <AuthorInfo

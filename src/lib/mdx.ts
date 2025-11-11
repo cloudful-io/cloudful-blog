@@ -39,6 +39,12 @@ export const getPostBySlug = (dir: string, slug: string) => {
   return { frontmatter: data, content };
 }; 
 
+export const calculateReadingTime = (text: string, wordsPerMinute = 240): number => {
+  const words = text.trim().split(/\s+/).length;
+  const minutes = Math.ceil(words / wordsPerMinute);
+  return minutes;
+};
+
 function parsePostFile(filePath: string, withContent = false): PostMeta {
   const filename = path.basename(filePath);
   const slug = filename.replace(/\.mdx?$/, "");

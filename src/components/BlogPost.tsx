@@ -6,6 +6,7 @@ import LinkRenderer from "./LinkRenderer";
 import AuthorInfo from "./AuthorInfo";
 import { TagList } from "./TagList";
 import formatTimeAgo from "../lib/formatTimeAgo";
+import { calculateReadingTime } from "../lib/mdx";
 
 export function BlogPost({
   title,
@@ -18,10 +19,12 @@ export function BlogPost({
   frontmatter: any;
   content: string;
 }) {
+  const minRead = calculateReadingTime(content);
   return (
     <Stack spacing={2}>
       <Typography variant="body2" color="text.secondary">
-        {formatTimeAgo(new Date(`${frontmatter.date}T00:00:00`)).toUpperCase()}
+        {formatTimeAgo(new Date(`${frontmatter.date}T00:00:00`)).toUpperCase()} ·
+        {` ${minRead} min read`}
       </Typography>
       <Typography variant="h2">{frontmatter.title}</Typography>
       <AuthorInfo
