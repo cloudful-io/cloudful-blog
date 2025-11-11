@@ -2,6 +2,7 @@ import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { Typography, Box, Stack, useTheme } from '@mui/material'
 import ImageRenderer from "./ImageRenderer";
+import LinkRenderer from "./LinkRenderer";
 import AuthorInfo from "./AuthorInfo";
 import { TagList } from "./TagList";
 import formatTimeAgo from "../lib/formatTimeAgo";
@@ -42,4 +43,4 @@ export function BlogPost({
   );
 }
 
-const components = { img: ImageRenderer };
+const components = { img: ImageRenderer, a: LinkRenderer };

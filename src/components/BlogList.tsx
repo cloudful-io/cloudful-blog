@@ -3,6 +3,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import { Typography, Stack, Divider } from "@mui/material";
 import type { PostMeta } from "../lib/mdx"
 import ImageRenderer from "./ImageRenderer";
+import LinkRenderer from "./LinkRenderer";
 import AuthorInfo from "./AuthorInfo";
 import { TagList } from "./TagList";
 import formatTimeAgo from "../lib/formatTimeAgo";
@@ -51,4 +52,5 @@ export function BlogList({
     </Stack>
   )
 }
-const components = { img: ImageRenderer };
+
+const components = { img: ImageRenderer, a: LinkRenderer };
