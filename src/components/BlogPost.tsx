@@ -24,7 +24,7 @@ export function BlogPost({
     <Stack spacing={2}>
       <Typography variant="body2" color="text.secondary">
         {formatTimeAgo(new Date(`${frontmatter.date}T00:00:00`)).toUpperCase()} ·
-        {` ${minRead} min read`}
+        {` ${minRead} MIN READ`}
       </Typography>
       <Typography variant="h2">{frontmatter.title}</Typography>
       <AuthorInfo

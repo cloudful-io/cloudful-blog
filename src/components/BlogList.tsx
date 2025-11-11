@@ -26,7 +26,7 @@ export function BlogList({
           <div key={post.slug}>
             <Typography variant="body2" color="text.secondary">
               {formatTimeAgo(new Date(`${post.date}T00:00:00`)).toUpperCase()} ·
-              {` ${calculateReadingTime(post.mdxSource || "")} min read`}
+              {` ${calculateReadingTime(post.mdxSource || "")} MIN READ`}
             </Typography>
             <Typography variant="h2">{post.title}</Typography>
             <AuthorInfo
