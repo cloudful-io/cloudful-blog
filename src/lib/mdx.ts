@@ -7,6 +7,7 @@ export type PostMeta = {
   title: string;
   date: string;
   summary: string;
+  featuredImage?: string;
   tags?: string[];
   author?: {
     name: string;
@@ -68,6 +69,7 @@ function parsePostFile(filePath: string, withContent = false): PostMeta {
     title: data.title || "Untitled",
     date: data.date || "1970-01-01",
     summary: data.summary || "",
+    featuredImage: data.featuredImage || undefined,
     author,
     tags,
     ...(withContent ? { mdxSource: content } : {}),

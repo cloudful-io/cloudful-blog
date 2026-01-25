@@ -32,6 +32,19 @@ export function BlogPost({
         picture={frontmatter.author?.picture}
       />
       <TagList blogRootUrl={blogRootUrl} tags={frontmatter.tags} />
+      {frontmatter.featuredImage && (
+        <Box
+          component="img"
+          src={frontmatter.featuredImage}
+          alt={frontmatter.title}
+          sx={{
+            mb: 2,
+            width: '100%',
+            height: 'auto',
+            borderRadius: 1.5,
+          }}
+        />
+      )}
       <article className="prose">
         <MDXRemote source={content} components={components}/>
       </article>
