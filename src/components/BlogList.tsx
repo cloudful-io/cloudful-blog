@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { Typography, Stack, Divider } from "@mui/material";
+import { Box, Typography, Stack, Divider } from "@mui/material";
 import type { PostMeta } from "../lib/mdx"
 import ImageRenderer from "./ImageRenderer";
 import LinkRenderer from "./LinkRenderer";
@@ -39,17 +39,25 @@ export function BlogList({
               </article>
             ) : (
                 <div key={`${post.slug}-${index}`}>
+                  {post.featuredImage && (
+                    <Box
+                      component="img"
+                      src={post.featuredImage}
+                      alt={post.title}
+                      sx={{
+                        mb: 2,
+                        width: "100%",
+                        height: "auto",
+                        borderRadius: 1.5,
+                      }}
+                    />
+                  )}
                   {post.summary && (
                     <Typography variant="body1" sx={{my:1}}>{post.summary}</Typography>
                   )}
                   <Link 
                     href={`${blogRootUrl}/${post.slug}`}
-                    style={{
-                      color: "inherit",
-                      textDecoration: "none",
-                      fontWeight: 500,
-                      transition: "color 0.2s ease-in-out",
-                    }}
+                    color="primary"
                     >
                     Read more →
                   </Link>
