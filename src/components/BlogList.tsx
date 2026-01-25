@@ -35,7 +35,7 @@ export function BlogList({
               gridTemplateColumns: {
                 xs: "1fr",
                 sm: "repeat(2, 1fr)",
-                md: "repeat(3, 1fr)",
+                md: "repeat(2, 1fr)",
               },
               gap: 4,
             }}
