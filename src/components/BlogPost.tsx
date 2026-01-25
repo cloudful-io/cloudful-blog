@@ -41,7 +41,7 @@ export function BlogPost({
             mb: 2,
             width: '100%',
             height: 'auto',
-            borderRadius: 1.5,
+            borderRadius: 2,
           }}
         />
       )}

@@ -46,6 +46,19 @@ export function BlogTagList({
               </article>
             ) : (
                 <div key={`${post.slug}-${index}`}>
+                  {post.featuredImage && (
+                    <Box
+                      component="img"
+                      src={post.featuredImage}
+                      alt={post.title}
+                      sx={{
+                        my: 2,
+                        width: "100%",
+                        height: "auto",
+                        borderRadius: 2,
+                      }}
+                    />
+                  )}
                   {post.summary && (
                     <Typography variant="body1" sx={{my:1}}>{post.summary}</Typography>
                   )}

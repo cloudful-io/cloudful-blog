@@ -45,10 +45,10 @@ export function BlogList({
                       src={post.featuredImage}
                       alt={post.title}
                       sx={{
-                        mb: 2,
+                        my: 2,
                         width: "100%",
                         height: "auto",
-                        borderRadius: 1.5,
+                        borderRadius: 2,
                       }}
                     />
                   )}
@@ -57,7 +57,7 @@ export function BlogList({
                   )}
                   <Link 
                     href={`${blogRootUrl}/${post.slug}`}
-                    color="primary"
+                    color="inherit"
                     >
                     Read more →
                   </Link>
