@@ -1,75 +1,56 @@
-import Link from "next/link";
-import { MDXRemote } from "next-mdx-remote/rsc";
-import { Box, Typography, Stack, Divider } from "@mui/material";
-import type { PostMeta } from "../lib/mdx"
-import ImageRenderer from "./ImageRenderer";
-import LinkRenderer from "./LinkRenderer";
-import AuthorInfo from "./AuthorInfo";
-import { TagList } from "./TagList";
-import formatTimeAgo from "../lib/formatTimeAgo";
-import { calculateReadingTime } from "../lib/mdx";
+import { Stack, Divider, Box } from "@mui/material";
+import type { PostMeta } from "../lib/mdx";
+import { PostCard } from "./PostCard";
 
-export function BlogList({ 
+export function BlogList({
   blogRootUrl,
   showFullContent,
-  posts
- }: { 
-  title?: string | undefined,
-  blogRootUrl : string,
-  showFullContent?: boolean,
-  posts: PostMeta[] 
+  posts,
+}: {
+  blogRootUrl: string;
+  showFullContent?: boolean;
+  posts: PostMeta[];
 }) {
-  return (
-    <Stack spacing={2}>
-      {posts.map((post, index) => (
-          <div key={post.slug}>
-            <Typography variant="body2" color="text.secondary">
-              {formatTimeAgo(new Date(`${post.date}T00:00:00`)).toUpperCase()} ·
-              {` ${calculateReadingTime(post.mdxSource || "")} MIN READ`}
-            </Typography>
-            <Typography variant="h2">{post.title}</Typography>
-            <AuthorInfo
-              name={post.author?.name}
-              picture={post.author?.picture}
-            />
-            <TagList blogRootUrl={blogRootUrl} tags={post.tags} />
-            {showFullContent ? (
-              <article className="prose mt-2">
-                <MDXRemote source={post.mdxSource!} components={components} />
-              </article>
-            ) : (
-                <div key={`${post.slug}-${index}`}>
-                  {post.featuredImage && (
-                    <Box
-                      component="img"
-                      src={post.featuredImage}
-                      alt={post.title}
-                      sx={{
-                        my: 2,
-                        width: "100%",
-                        height: "auto",
-                        borderRadius: 2,
-                      }}
-                    />
-                  )}
-                  {post.summary && (
-                    <Typography variant="body1" sx={{my:1}}>{post.summary}</Typography>
-                  )}
-                  <Link 
-                    href={`${blogRootUrl}/${post.slug}`}
-                    color="inherit"
-                    >
-                    Read more →
-                  </Link>
-                </div>
-            )}
-            {index < (posts.length-1) && (
-              <Divider sx={{ my: 2 }} />
-            )}
-          </div>
-      ))}
-    </Stack>
-  )
-}
+  if (!posts.length) return null;
 
-const components = { img: ImageRenderer, a: LinkRenderer };
+  const [featuredPost, ...restPosts] = posts;
+
+  return (
+    <Stack spacing={4}>
+      {/* 🔝 Featured post */}
+      {featuredPost && (
+        <PostCard
+          post={featuredPost}
+          blogRootUrl={blogRootUrl}
+          showFullContent={showFullContent ?? false}
+          variant="featured"
+        />
+      )}
+      {!showFullContent && restPosts.length > 0 && (
+        <>
+          <Divider />
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: {
+                xs: "1fr",
+                sm: "repeat(2, 1fr)",
+                md: "repeat(3, 1fr)",
+              },
+              gap: 4,
+            }}
+          >
+            {restPosts.map((post) => (
+              <PostCard
+                key={post.slug}
+                post={post}
+                blogRootUrl={blogRootUrl}
+                variant="grid"
+              />
+            ))}
+          </Box>
+        </>
+      )}
+    </Stack>
+  );
+}

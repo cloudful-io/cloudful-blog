@@ -1,0 +1,88 @@
+import Link from "next/link";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import { Box, Typography, Stack } from "@mui/material";
+import type { PostMeta } from "../lib/mdx";
+import AuthorInfo from "./AuthorInfo";
+import { TagList } from "./TagList";
+import formatTimeAgo from "../lib/formatTimeAgo";
+import { calculateReadingTime } from "../lib/mdx";
+import ImageRenderer from "./ImageRenderer";
+import LinkRenderer from "./LinkRenderer";
+
+const components = {
+  img: ImageRenderer,
+  a: LinkRenderer,
+};
+
+export type PostCardVariant = "featured" | "grid";
+
+export function PostCard({
+  post,
+  blogRootUrl,
+  showFullContent = false,
+  variant = "featured",
+}: {
+  post: PostMeta;
+  blogRootUrl: string;
+  showFullContent?: boolean;
+  variant?: PostCardVariant;
+}) {
+  const isGrid = variant === "grid";
+
+  return (
+    <Stack spacing={1.5}>
+      <Typography variant="body2" color="text.secondary">
+        {formatTimeAgo(new Date(`${post.date}T00:00:00`)).toUpperCase()} ·{" "}
+        {`${calculateReadingTime(post.mdxSource || "")} MIN READ`}
+      </Typography>
+
+      <Typography variant={isGrid ? "h5" : "h2"}>
+        {post.title}
+      </Typography>
+
+      {!isGrid && (
+        <AuthorInfo
+          name={post.author?.name}
+          picture={post.author?.picture}
+        />
+      )}
+
+      <TagList blogRootUrl={blogRootUrl} tags={post.tags} />
+
+      {showFullContent ? (
+        <article className="prose mt-2">
+          <MDXRemote source={post.mdxSource!} components={components} />
+        </article>
+      ) : (
+        <>
+          {post.featuredImage && (
+            <Box
+              component="img"
+              src={post.featuredImage}
+              alt={post.title}
+              sx={{
+                my: 1.5,
+                width: "100%",
+                height: "auto",
+                borderRadius: 2,
+              }}
+            />
+          )}
+
+          {post.summary && (
+            <Typography
+              variant="body2"
+              color="text.secondary"
+            >
+              {post.summary}
+            </Typography>
+          )}
+
+          <Link href={`${blogRootUrl}/${post.slug}`} color="inherit">
+            Read more →
+          </Link>
+        </>
+      )}
+    </Stack>
+  );
+}
