@@ -52,7 +52,7 @@ export function BlogPost({
         <Link href={blogRootUrl} style={{ textDecoration: 'none' }}>
           <Typography color="primary" sx={{ '&:hover': { textDecoration: 'underline' } }}>
             ← Back to {title ?? "Blog"}
-          </Typography>
+          </Typography>  
         </Link>
       </Box>
     </Stack>
