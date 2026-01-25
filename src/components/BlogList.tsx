@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { Typography, Stack, Divider } from "@mui/material";
-import { useTheme } from "@mui/material";
 import type { PostMeta } from "../lib/mdx"
 import ImageRenderer from "./ImageRenderer";
 import LinkRenderer from "./LinkRenderer";
@@ -20,7 +19,6 @@ export function BlogList({
   showFullContent?: boolean,
   posts: PostMeta[] 
 }) {
-  const theme = useTheme();
   return (
     <Stack spacing={2}>
       {posts.map((post, index) => (
@@ -47,13 +45,12 @@ export function BlogList({
                   <Link 
                     href={`${blogRootUrl}/${post.slug}`}
                     style={{
-                      color: theme.palette.mode === "dark"
-                        ? theme.palette.primary.light
-                        : theme.palette.primary.main,
+                      color: "inherit",
                       textDecoration: "none",
                       fontWeight: 500,
                       transition: "color 0.2s ease-in-out",
-                    }}>
+                    }}
+                    >
                     Read more →
                   </Link>
                 </div>
