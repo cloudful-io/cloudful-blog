@@ -36,7 +36,7 @@ export function PostCard({
         {`${calculateReadingTime(post.mdxSource || "")} MIN READ`}
       </Typography>
 
-      <Typography variant={isGrid ? "h5" : "h2"}>
+      <Typography variant={isGrid ? "h3" : "h2"}>
         {post.title}
       </Typography>
 
@@ -50,7 +50,7 @@ export function PostCard({
       <TagList blogRootUrl={blogRootUrl} tags={post.tags} />
 
       {showFullContent ? (
-        <article className="prose mt-2">
+        <article className="prose prose-lg mt-2">
           <MDXRemote source={post.mdxSource!} components={components} />
         </article>
       ) : (
@@ -78,7 +78,7 @@ export function PostCard({
 
           {post.summary && (
             <Typography
-              variant="body2"
+              variant="body1"
               color="text.secondary"
             >
               {post.summary}

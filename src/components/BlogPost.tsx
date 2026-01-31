@@ -26,7 +26,7 @@ export function BlogPost({
         {formatTimeAgo(new Date(`${frontmatter.date}T00:00:00`)).toUpperCase()} ·
         {` ${minRead} MIN READ`}
       </Typography>
-      <Typography variant="h2">{frontmatter.title}</Typography>
+      <Typography variant="h1">{frontmatter.title}</Typography>
       <AuthorInfo
         name={frontmatter.author?.name}
         picture={frontmatter.author?.picture}
@@ -52,7 +52,7 @@ export function BlogPost({
           />
         </Box>
       )}
-      <article className="prose">
+      <article className="prose prose-lg">
         <MDXRemote source={content} components={components}/>
       </article>
       <Box sx={{ mb: 3 }}>
