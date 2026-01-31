@@ -56,39 +56,41 @@ export function PostCard({
       ) : (
         <>
           {post.featuredImage && (
-            <Box
-              sx={{
-                width: "100%",
-                display: "flex",
-                justifyContent: "center",
-                aspectRatio: "16 / 9",
-                overflow: "hidden",
-                borderRadius: 2,
-                mb: 2,
-                backgroundColor: "action.hover"
-              }}
-            >
-              <Box
-                component="img"
-                src={post.featuredImage}
-                alt={post.title}
-                sx={{
-                  my: 1.5,
-                  width: isGrid
-                    ? "100%"
-                    : {
-                        xs: "100%",
-                        sm: "80%",
-                        md: "70%",
-                        lg: "60%",
-                      },
-                  height: "100%",
-                  objectFit: "contain",
-                  objectPosition: "center",
-                  backgroundColor: "inherit",
-                  borderRadius: 2,
-                }}
-              />
+            <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
+              {variant === "grid" ? (
+                // Grid variant → fixed aspect ratio, crop if needed
+                <Box
+                  component="img"
+                  src={post.featuredImage}
+                  alt={post.title}
+                  sx={{
+                    width: "100%",
+                    aspectRatio: "16 / 9",
+                    height: "100%",
+                    objectFit: "cover",
+                    objectPosition: "center",
+                    borderRadius: 2,
+                  }}
+                />
+              ) : (
+                // Featured variant → dynamic width, natural height
+                <Box
+                  component="img"
+                  src={post.featuredImage}
+                  alt={post.title}
+                  sx={{
+                    width: {
+                      xs: "100%",
+                      sm: "80%",
+                      md: "70%",
+                      lg: "60%",
+                    },
+                    height: "auto",
+                    borderRadius: 2,
+                    my: 1.5,
+                  }}
+                />
+              )}
             </Box>
           )}
 
