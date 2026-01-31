@@ -112,7 +112,7 @@ export function PostCard({
             </Typography>
           )}
 
-          <Link href={`${blogRootUrl}/${post.slug}`}>
+          <Link href={`${blogRootUrl}/${post.slug}`} style={{ textDecoration: 'none' }}>
             <Typography color="primary" sx={{ '&:hover': { textDecoration: 'underline' } }}>
               Read more →
             </Typography>
