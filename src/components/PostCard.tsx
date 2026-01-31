@@ -56,7 +56,16 @@ export function PostCard({
       ) : (
         <>
           {post.featuredImage && (
-            <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
+            <Box 
+              sx={{ 
+                display: "flex", 
+                width: isGrid ? "100%" : "auto",
+                aspectRatio: isGrid ? "16 / 9" : "auto",
+                overflow: isGrid ? "hidden" : "auto",
+                backgroundColor: isGrid ? "action.hover" : "inherit",
+                justifyContent: "center", 
+                mb: 2 
+              }}>
               {variant === "grid" ? (
                 // Grid variant → fixed aspect ratio, crop if needed
                 <Box
