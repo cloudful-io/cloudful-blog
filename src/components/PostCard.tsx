@@ -65,6 +65,7 @@ export function PostCard({
                 overflow: "hidden",
                 borderRadius: 2,
                 mb: 2,
+                backgroundColor: "action.hover"
               }}
             >
               <Box
@@ -82,7 +83,9 @@ export function PostCard({
                         lg: "60%",
                       },
                   height: "100%",
-                  objectFit: "cover",
+                  objectFit: "contain",
+                  objectPosition: "center",
+                  backgroundColor: "inherit",
                   borderRadius: 2,
                 }}
               />
