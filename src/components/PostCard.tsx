@@ -73,10 +73,10 @@ export function PostCard({
                   alt={post.title}
                   sx={{
                     width: "100%",
-                    aspectRatio: "16 / 9",
                     height: "100%",
-                    objectFit: "cover",
+                    objectFit: "contain",
                     objectPosition: "center",
+                    backgroundColor: "inherit",
                     borderRadius: 2,
                   }}
                 />
@@ -95,7 +95,6 @@ export function PostCard({
                     },
                     height: "auto",
                     borderRadius: 2,
-                    my: 1.5,
                   }}
                 />
               )}
