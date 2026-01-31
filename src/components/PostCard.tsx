@@ -63,7 +63,9 @@ export function PostCard({
                 overflow: isGrid ? "hidden" : "auto",
                 borderRadius: 2,
                 mb: 2,
-                backgroundColor: isGrid ? "action.hover" : "inherit", // placeholder if image is smaller
+                backgroundColor: isGrid ? "action.hover" : "inherit",
+                display: isGrid ? "block" : "flex",
+                justifyContent: isGrid ? undefined : "center",
               }}>
               {variant === "grid" ? (
                 // Grid variant → fixed aspect ratio, crop if needed
