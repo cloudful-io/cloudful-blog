@@ -33,24 +33,24 @@ export function BlogPost({
       />
       <TagList blogRootUrl={blogRootUrl} tags={frontmatter.tags} />
       {frontmatter.featuredImage && (
-        <Box
-          component="img"
-          src={frontmatter.featuredImage}
-          alt={frontmatter.title}
-          sx={{
-            display: "block",
-            mx: "auto",
-            mb: 2,
-            width: {
-              xs: "100%",
-              sm: "80%",
-              md: "70%",
-              lg: "60%",
-            },
-            height: 'auto',
-            borderRadius: 2,
-          }}
-        />
+        <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
+          <Box
+            component="img"
+            src={frontmatter.featuredImage}
+            alt={frontmatter.title}
+            sx={{
+              mb: 2,
+              width: {
+                xs: "100%",
+                sm: "80%",
+                md: "70%",
+                lg: "60%",
+              },
+              height: 'auto',
+              borderRadius: 2,
+            }}
+          />
+        </Box>
       )}
       <article className="prose">
         <MDXRemote source={content} components={components}/>

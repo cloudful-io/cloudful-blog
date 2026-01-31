@@ -56,24 +56,24 @@ export function PostCard({
       ) : (
         <>
           {post.featuredImage && (
-            <Box
-              component="img"
-              src={post.featuredImage}
-              alt={post.title}
-              sx={{
-                display: "block",
-                mx: "auto",
-                my: 1.5,
-                width: {
-                  xs: "100%",
-                  sm: "80%",
-                  md: "70%",
-                  lg: "60%",
-                },
-                height: "auto",
-                borderRadius: 2,
-              }}
-            />
+            <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
+              <Box
+                component="img"
+                src={post.featuredImage}
+                alt={post.title}
+                sx={{
+                  my: 1.5,
+                  width: {
+                    xs: "100%",
+                    sm: "80%",
+                    md: "70%",
+                    lg: "60%",
+                  },
+                  height: "auto",
+                  borderRadius: 2,
+                }}
+              />
+            </Box>
           )}
 
           {post.summary && (
