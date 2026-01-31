@@ -112,8 +112,10 @@ export function PostCard({
             </Typography>
           )}
 
-          <Link href={`${blogRootUrl}/${post.slug}`} color="inherit">
-            Read more →
+          <Link href={`${blogRootUrl}/${post.slug}`}>
+            <Typography color="primary" sx={{ '&:hover': { textDecoration: 'underline' } }}>
+              Read more →
+            </Typography>
           </Link>
         </>
       )}
