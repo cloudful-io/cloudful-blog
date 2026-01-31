@@ -1,6 +1,6 @@
 {
   "name": "cloudful-blog",
-  "version": "1.9.17",
+  "version": "1.9.18",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
