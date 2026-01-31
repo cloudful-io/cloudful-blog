@@ -62,7 +62,12 @@ export function PostCard({
               alt={post.title}
               sx={{
                 my: 1.5,
-                width: "100%",
+                width: {
+                  xs: "100%",
+                  sm: "80%",
+                  md: "70%",
+                  lg: "60%",
+                },
                 height: "auto",
                 borderRadius: 2,
               }}
