@@ -61,6 +61,8 @@ export function PostCard({
               src={post.featuredImage}
               alt={post.title}
               sx={{
+                display: "block",
+                mx: "auto",
                 my: 1.5,
                 width: {
                   xs: "100%",

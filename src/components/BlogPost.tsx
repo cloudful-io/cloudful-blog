@@ -38,8 +38,15 @@ export function BlogPost({
           src={frontmatter.featuredImage}
           alt={frontmatter.title}
           sx={{
+            display: "block",
+            mx: "auto",
             mb: 2,
-            width: '100%',
+            width: {
+              xs: "100%",
+              sm: "80%",
+              md: "70%",
+              lg: "60%",
+            },
             height: 'auto',
             borderRadius: 2,
           }}
