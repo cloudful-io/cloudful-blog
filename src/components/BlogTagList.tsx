@@ -22,7 +22,7 @@ export function BlogTagList({
     <Stack spacing={4}>
       {/* Tag heading */}
       <Typography variant="h4" sx={{ mb: 2 }}>
-        Tag: {tag}
+        Tag: {posts[0]!.tags?.find(t => t.slug === tag)?.name ?? tag}
       </Typography>
 
       {/* Posts */}

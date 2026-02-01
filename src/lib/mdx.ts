@@ -8,7 +8,7 @@ export type PostMeta = {
   date: string;
   summary: string;
   featuredImage?: string;
-  tags?: string[];
+  tags?: { name: string; slug: string }[];
   author?: {
     name: string;
     picture: string;
@@ -23,15 +23,16 @@ export const getAllPosts = (dir: string, withContent = false): PostMeta[] => {
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 };
 
-export const getPostsByTag = (dir: string, tag: string, withContent = false): PostMeta[] => {
+export const getPostsByTag = (dir: string, tagSlug: string, withContent = false): PostMeta[] => {
   const files = fs.readdirSync(dir);
-  const normalizedTag = tag.toLowerCase();
 
   return files
     .map((filename) => parsePostFile(path.join(dir, filename), withContent))
-    .filter((post) => post.tags?.includes(normalizedTag))
+    .filter((post) =>
+      post.tags?.some((t: any) => t.slug === tagSlug)
+    )
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-}
+};
 
 export const getPostBySlug = (dir: string, slug: string) => {
   const filePath = path.join(dir, `${slug}.mdx`);
@@ -61,8 +62,11 @@ function parsePostFile(filePath: string, withContent = false): PostMeta {
       : undefined;
 
   const tags = Array.isArray(data.tags)
-    ? data.tags.map((t: unknown) => String(t).toLowerCase())
-    : [];
+  ? data.tags.map((t: unknown) => ({
+      name: String(t),
+      slug: String(t).toLowerCase().replace(/\s+/g, "-"),
+    }))
+  : [];
 
   return {
     slug,

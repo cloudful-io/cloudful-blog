@@ -47,7 +47,7 @@ export function PostCard({
         />
       )}
 
-      <TagList blogRootUrl={blogRootUrl} tags={post.tags} />
+      <TagList blogRootUrl={blogRootUrl} tags={post.tags?.map((t) => t.slug) ?? []} />
 
       {showFullContent ? (
         <article className="prose mt-2">
