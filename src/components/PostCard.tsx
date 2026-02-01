@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { Box, Typography, Stack } from "@mui/material";
+import { Box, Divider, Typography, Stack } from "@mui/material";
 import type { PostMeta } from "../lib/mdx";
 import AuthorInfo from "./AuthorInfo";
 import { TagList } from "./TagList";
@@ -36,7 +36,7 @@ export function PostCard({
         {`${calculateReadingTime(post.mdxSource || "")} MIN READ`}
       </Typography>
 
-      <Typography variant={isGrid ? "h5" : "h2"}>
+      <Typography variant={isGrid ? "h3" : "h2"}>
         {post.title}
       </Typography>
 
@@ -50,36 +50,72 @@ export function PostCard({
       <TagList blogRootUrl={blogRootUrl} tags={post.tags?.map((t) => t.slug) ?? []} />
 
       {showFullContent ? (
-        <article className="prose mt-2">
+        <article className="prose prose-lg mt-2">
           <MDXRemote source={post.mdxSource!} components={components} />
         </article>
       ) : (
         <>
           {post.featuredImage && (
-            <Box
-              component="img"
-              src={post.featuredImage}
-              alt={post.title}
+            <Box 
               sx={{
-                my: 1.5,
-                width: "100%",
-                height: "auto",
-                borderRadius: 2,
-              }}
-            />
+                width: isGrid ? "100%" : "auto",
+                aspectRatio: isGrid ? "16 / 9" : "auto",
+                overflow: isGrid ? "hidden" : "auto",
+                borderRadius: isGrid ? 2 : 4,
+                mb: 2,
+                backgroundColor: isGrid ? "action.hover" : "inherit",
+                display: isGrid ? "block" : "flex",
+                justifyContent: isGrid ? undefined : "center",
+              }}>
+              {variant === "grid" ? (
+                // Grid variant → fixed aspect ratio, crop if needed
+                <Box
+                  component="img"
+                  src={post.featuredImage}
+                  alt={post.title}
+                  sx={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "contain",
+                    objectPosition: "center",
+                    backgroundColor: "inherit",
+                    borderRadius: 2,
+                  }}
+                />
+              ) : (
+                // Featured variant → dynamic width, natural height
+                <Box
+                  component="img"
+                  src={post.featuredImage}
+                  alt={post.title}
+                  sx={{
+                    width: {
+                      xs: "100%",
+                      sm: "80%",
+                      md: "70%",
+                      lg: "60%",
+                    },
+                    height: "auto",
+                    borderRadius: 2,
+                  }}
+                />
+              )}
+            </Box>
           )}
 
           {post.summary && (
             <Typography
-              variant="body2"
+              variant="body1"
               color="text.secondary"
             >
               {post.summary}
             </Typography>
           )}
 
-          <Link href={`${blogRootUrl}/${post.slug}`} color="inherit">
-            Read more →
+          <Link href={`${blogRootUrl}/${post.slug}`} style={{ textDecoration: 'none' }}>
+            <Typography color="primary" sx={{ '&:hover': { textDecoration: 'underline' } }}>
+              Read more →
+            </Typography>
           </Link>
         </>
       )}
