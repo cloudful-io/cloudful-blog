@@ -117,7 +117,6 @@ export function PostCard({
               Read more →
             </Typography>
           </Link>
-          <Divider/>
         </>
       )}
     </Stack>
