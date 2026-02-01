@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { Box, Typography, Stack } from "@mui/material";
+import { Box, Divider, Typography, Stack } from "@mui/material";
 import type { PostMeta } from "../lib/mdx";
 import AuthorInfo from "./AuthorInfo";
 import { TagList } from "./TagList";
@@ -117,6 +117,7 @@ export function PostCard({
               Read more →
             </Typography>
           </Link>
+          <Divider/>
         </>
       )}
     </Stack>
