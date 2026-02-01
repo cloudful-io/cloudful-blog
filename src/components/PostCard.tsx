@@ -61,7 +61,7 @@ export function PostCard({
                 width: isGrid ? "100%" : "auto",
                 aspectRatio: isGrid ? "16 / 9" : "auto",
                 overflow: isGrid ? "hidden" : "auto",
-                borderRadius: 2,
+                borderRadius: isGrid ? 2 : 4,
                 mb: 2,
                 backgroundColor: isGrid ? "action.hover" : "inherit",
                 display: isGrid ? "block" : "flex",

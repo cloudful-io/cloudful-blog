@@ -22,36 +22,47 @@ export function BlogPost({
   const minRead = calculateReadingTime(content);
   return (
     <Stack spacing={2}>
-      <Typography variant="body2" color="text.secondary">
-        {formatTimeAgo(new Date(`${frontmatter.date}T00:00:00`)).toUpperCase()} ·
-        {` ${minRead} MIN READ`}
-      </Typography>
-      <Typography variant="h1">{frontmatter.title}</Typography>
-      <AuthorInfo
-        name={frontmatter.author?.name}
-        picture={frontmatter.author?.picture}
-      />
-      <TagList blogRootUrl={blogRootUrl} tags={frontmatter.tags} />
-      {frontmatter.featuredImage && (
-        <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
-          <Box
-            component="img"
-            src={frontmatter.featuredImage}
-            alt={frontmatter.title}
-            sx={{
-              mb: 2,
-              width: {
-                xs: "100%",
-                sm: "80%",
-                md: "70%",
-                lg: "60%",
-              },
-              height: 'auto',
-              borderRadius: 2,
-            }}
+      <Box
+        sx={{
+          backgroundColor: "action.hover",
+          borderRadius: 2,
+          px: 2,
+          py: 1.5,
+        }}
+      >
+        <Stack spacing={1}>
+          <Typography variant="body2" color="text.secondary">
+            {formatTimeAgo(new Date(`${frontmatter.date}T00:00:00`)).toUpperCase()} ·
+            {` ${minRead} MIN READ`}
+          </Typography>
+          <Typography variant="h1">{frontmatter.title}</Typography>
+          <AuthorInfo
+            name={frontmatter.author?.name}
+            picture={frontmatter.author?.picture}
           />
-        </Box>
-      )}
+          <TagList blogRootUrl={blogRootUrl} tags={frontmatter.tags} />
+          {frontmatter.featuredImage && (
+            <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
+              <Box
+                component="img"
+                src={frontmatter.featuredImage}
+                alt={frontmatter.title}
+                sx={{
+                  mb: 2,
+                  width: {
+                    xs: "100%",
+                    sm: "80%",
+                    md: "70%",
+                    lg: "60%",
+                  },
+                  height: 'auto',
+                  borderRadius: 2,
+                }}
+              />
+            </Box>
+          )}
+        </Stack>
+      </Box>
       <article className="prose prose-lg">
         <MDXRemote source={content} components={components}/>
       </article>
