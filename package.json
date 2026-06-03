@@ -27,7 +27,7 @@
     "@mui/icons-material": "^7.3.4",
     "@mui/material": "^7.3.4",
     "gray-matter": "^4.0.3",
-    "next-mdx-remote": "^5.0.0"
+    "next-mdx-remote": "^6.0.0"
   },
   "peerDependencies": {
     "next": ">=13.0.0",
