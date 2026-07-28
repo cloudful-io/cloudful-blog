@@ -26,29 +26,44 @@ export function BlogList({
           variant="featured"
         />
       )}
-      {!showFullContent && restPosts.length > 0 && (
+      {restPosts.length > 0 && (
         <>
           <Divider />
-          <Box
-            sx={{
-              display: "grid",
-              gridTemplateColumns: {
-                xs: "1fr",
-                sm: "repeat(2, 1fr)",
-                md: "repeat(2, 1fr)",
-              },
-              gap: 4,
-            }}
-          >
-            {restPosts.map((post) => (
-              <PostCard
-                key={post.slug}
-                post={post}
-                blogRootUrl={blogRootUrl}
-                variant="grid"
-              />
-            ))}
-          </Box>
+          {showFullContent ? (
+            <Stack spacing={4}>
+              {restPosts.map((post) => (
+                <PostCard
+                  key={post.slug}
+                  post={post}
+                  blogRootUrl={blogRootUrl}
+                  showFullContent={showFullContent ?? false}
+                  variant="featured"
+                />
+              ))}
+            </Stack>
+          ) : (
+            <Box
+              sx={{
+                display: "grid",
+                gridTemplateColumns: {
+                  xs: "1fr",
+                  sm: "repeat(2, 1fr)",
+                  md: "repeat(2, 1fr)",
+                },
+                gap: 4,
+              }}
+            >
+              {restPosts.map((post) => (
+                <PostCard
+                  key={post.slug}
+                  post={post}
+                  blogRootUrl={blogRootUrl}
+                  showFullContent={false}
+                  variant="grid"
+                />
+              ))}
+            </Box>
+          )}
         </>
       )}
     </Stack>
